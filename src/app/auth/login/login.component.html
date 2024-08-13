@@ -1,0 +1,60 @@
+<div class="login-container">
+    <div class="login-left">
+      <img src="assets/login.png" alt="Background" style="max-width: 100%"> 
+    </div>
+    <div class="login-right">
+      <div class="login-content">
+        <h1 class="logo">Logo</h1>
+        <div class="login-form">
+          <h1>Sign In</h1>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <h4>Enter your Email Address</h4>
+  
+            <mat-form-field appearance="outline" style="width:100%">
+              <input matInput type="email" placeholder="Enter Email" formControlName="email">
+              <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+                Email is required
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('email')?.hasError('email') && !loginForm.get('email')?.hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+            </mat-form-field>
+  
+            <h4>Enter your Password</h4>
+  
+            <mat-form-field appearance="outline" style="width:100%">
+              <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
+              <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+              <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                Password is required
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+                Password must be at least 8 characters long
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('password')?.hasError('hasUpperCase')">
+                Password must contain at least one uppercase letter
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('password')?.hasError('hasLowerCase')">
+                Password must contain at least one lowercase letter
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('password')?.hasError('hasNumber')">
+                Password must contain at least one number
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('password')?.hasError('hasSpecialCharacter')">
+                Password must contain at least one special character
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('password')?.hasError('hasSpace')">
+                Password cannot contain spaces
+              </mat-error>
+            </mat-form-field>
+            
+  
+            <button mat-raised-button type="submit">Sign In</button>
+            <p><a [routerLink]="['/auth/forgot']">Forgot Password</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
